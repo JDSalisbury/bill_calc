@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Split</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <h1>Bill Split</h1>
+      <div class="header-actions">
+        <button class="btn-icon" id="templatesBtn" title="Manage Templates">Templates</button>
+        <button class="btn-icon" id="settingsBtn" title="Settings">&#9881;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Month Navigation -->
+  <div class="month-nav-wrap">
+    <div class="month-nav">
+      <button class="btn-icon month-btn" id="prevMonthBtn">&#8592;</button>
+      <div class="month-label-wrap">
+        <span class="month-label" id="monthLabel">April 2026</span>
+        <span class="month-badge" id="monthBadge" style="display:none">All paid</span>
+      </div>
+      <button class="btn-icon month-btn" id="nextMonthBtn">&#8594;</button>
+    </div>
+    <button class="btn-mark-all" id="markAllBtn">Mark All Paid</button>
+  </div>
+
+  <!-- Balance Summary -->
+  <section class="summary-section">
+    <div class="summary-card" id="summaryCard">
+      <div class="summary-names">
+        <div class="partner-col">
+          <div class="partner-name" id="p1Name">Partner 1</div>
+          <div class="partner-total" id="p1Total">$0.00</div>
+          <div class="partner-label">total share</div>
+        </div>
+        <div class="balance-center">
+          <div class="balance-arrow" id="balanceArrow">&#8594;</div>
+          <div class="balance-amount" id="balanceAmount">$0.00</div>
+          <div class="balance-label" id="balanceLabel">even</div>
+        </div>
+        <div class="partner-col">
+          <div class="partner-name" id="p2Name">Partner 2</div>
+          <div class="partner-total" id="p2Total">$0.00</div>
+          <div class="partner-label">total share</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- Pet Widget -->
+    <div class="pet-widget" id="petWidget">
+      <div class="pet-text">
+        <div class="pet-eyebrow">🐾 moral support</div>
+        <div class="pet-caption" id="petCaption">Loading your friend...</div>
+        <div class="pet-subcaption" id="petSubcaption">hang tight</div>
+      </div>
+      <div class="pet-right">
+        <div class="pet-img-wrap loading" id="petImgWrap">
+          <img id="petImg" src="" alt="cute pet" style="opacity:0" onload="onPetLoad()">
+        </div>
+        <button class="btn-pet-refresh" onclick="fetchPet()">new friend ↻</button>
+      </div>
+    </div>
+
+    <!-- Empty month state -->
+    <div class="empty-month" id="emptyMonth" style="display:none">
+      <div class="empty-month-icon">📅</div>
+      <h3 id="emptyMonthTitle">No bills for this month yet</h3>
+      <p class="empty-month-sub">Start from your saved templates or add bills one by one.</p>
+      <div class="empty-month-actions">
+        <button class="btn-primary" id="initFromTemplatesBtn">Copy from Templates</button>
+        <button class="btn-secondary" onclick="openAddModal('utility', true)">+ Add manually</button>
+      </div>
+    </div>
+
+    <!-- Utility Bills -->
+    <section class="bills-section" id="utilitySection">
+      <div class="section-header">
+        <div>
+          <h2>Utilities</h2>
+          <span class="section-subtitle">Gas &middot; Electric &middot; Water &middot; Trash &middot; Internet &middot; Sewer &middot; Mortgage</span>
+        </div>
+        <button class="btn-add" onclick="openAddModal('utility')">+ Add</button>
+      </div>
+      <div class="bills-list" id="utilityList"></div>
+    </section>
+
+    <!-- Subscription Bills -->
+    <section class="bills-section" id="subscriptionSection">
+      <div class="section-header">
+        <div>
+          <h2>Subscriptions</h2>
+          <span class="section-subtitle">Streaming &middot; Services &middot; 50/50 split</span>
+        </div>
+        <button class="btn-add" onclick="openAddModal('subscription')">+ Add</button>
+      </div>
+      <div class="bills-list" id="subscriptionList"></div>
+    </section>
+  </main>
+
+  <!-- Add/Edit Monthly Bill Modal -->
+  <div class="modal-overlay" id="billModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Bill</h3>
+        <button class="btn-icon" onclick="closeModal('billModal')">&#10005;</button>
+      </div>
+      <form id="billForm">
+        <input type="hidden" id="billId">
+        <input type="hidden" id="billSplitType">
+
+        <div class="form-group">
+          <label>Bill Name</label>
+          <input type="text" id="billName" placeholder="e.g. Electric" required>
+        </div>
+        <div class="form-group">
+          <label>Amount</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="billAmount" placeholder="0.00" step="0.01" min="0" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Bill Owner <span class="hint">(who actually pays this bill)</span></label>
+          <div class="radio-group" id="ownerRadioGroup"></div>
+        </div>
+        <div class="form-group" id="sliderGroup">
+          <label>
+            <span id="p1SliderLabel">Partner 1</span> pays
+            <strong id="sliderValue">55%</strong>
+            &nbsp;/&nbsp;
+            <span id="p2SliderLabel">Partner 2</span> pays
+            <strong id="sliderValue2">45%</strong>
+          </label>
+          <input type="range" id="splitSlider" min="1" max="99" value="55" class="slider">
+          <div class="slider-ends"><span>1%</span><span>99%</span></div>
+        </div>
+        <div class="form-group">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <input type="text" id="billNotes" placeholder="Any notes...">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('billModal')">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Templates Modal -->
+  <div class="modal-overlay" id="templatesModal">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <div>
+          <h3>Bill Templates</h3>
+          <p class="modal-subtitle">Default bills copied to new months. Editing here won't affect existing months.</p>
+        </div>
+        <button class="btn-icon" onclick="closeModal('templatesModal')">&#10005;</button>
+      </div>
+      <div class="tmpl-sections">
+        <div class="tmpl-section">
+          <div class="tmpl-section-header">
+            <span>Utilities</span>
+            <button class="btn-add btn-sm" onclick="openTmplModal('utility')">+ Add</button>
+          </div>
+          <div id="tmplUtilityList" class="tmpl-list"></div>
+        </div>
+        <div class="tmpl-section">
+          <div class="tmpl-section-header">
+            <span>Subscriptions</span>
+            <button class="btn-add btn-sm" onclick="openTmplModal('subscription')">+ Add</button>
+          </div>
+          <div id="tmplSubscriptionList" class="tmpl-list"></div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn-primary" onclick="closeModal('templatesModal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add/Edit Template Modal -->
+  <div class="modal-overlay" id="tmplModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="tmplModalTitle">Add Template</h3>
+        <button class="btn-icon" onclick="closeModal('tmplModal')">&#10005;</button>
+      </div>
+      <form id="tmplForm">
+        <input type="hidden" id="tmplId">
+        <input type="hidden" id="tmplSplitType">
+        <div class="form-group">
+          <label>Bill Name</label>
+          <input type="text" id="tmplName" placeholder="e.g. Electric" required>
+        </div>
+        <div class="form-group">
+          <label>Default Amount</label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="tmplAmount" placeholder="0.00" step="0.01" min="0" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Bill Owner</label>
+          <div class="radio-group" id="tmplOwnerRadioGroup"></div>
+        </div>
+        <div class="form-group" id="tmplSliderGroup">
+          <label>
+            <span id="tmplP1Label">Partner 1</span> pays
+            <strong id="tmplSliderValue">55%</strong>
+            &nbsp;/&nbsp;
+            <span id="tmplP2Label">Partner 2</span> pays
+            <strong id="tmplSliderValue2">45%</strong>
+          </label>
+          <input type="range" id="tmplSlider" min="1" max="99" value="55" class="slider">
+          <div class="slider-ends"><span>1%</span><span>99%</span></div>
+        </div>
+        <div class="form-group">
+          <label>Notes <span class="hint">(optional)</span></label>
+          <input type="text" id="tmplNotes" placeholder="Any notes...">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('tmplModal')">Cancel</button>
+          <button type="submit" class="btn-primary">Save Template</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Settings</h3>
+        <button class="btn-icon" onclick="closeModal('settingsModal')">&#10005;</button>
+      </div>
+      <form id="settingsForm">
+        <div class="form-group">
+          <label>Partner 1 Name</label>
+          <input type="text" id="settingsP1" placeholder="Partner 1" required>
+        </div>
+        <div class="form-group">
+          <label>Partner 2 Name</label>
+          <input type="text" id="settingsP2" placeholder="Partner 2" required>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="closeModal('settingsModal')">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3>Delete Bill</h3>
+        <button class="btn-icon" onclick="closeModal('deleteModal')">&#10005;</button>
+      </div>
+      <p style="margin: 0 0 1.5rem; color: var(--text-muted)">Delete <strong id="deleteBillName"></strong> from this month?</p>
+      <div class="form-actions">
+        <button class="btn-secondary" onclick="closeModal('deleteModal')">Cancel</button>
+        <button class="btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

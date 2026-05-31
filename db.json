@@ -1,0 +1,295 @@
+{
+  "settings": {
+    "partner1": "Jeff",
+    "partner2": "Haleigh"
+  },
+  "monthlyData": {
+    "2026-04": {
+      "bills": [
+        {
+          "id": "e7babb4b-b789-4242-b862-e6269f19de5c",
+          "name": "AEP",
+          "amount": 114.57,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "18645956-5064-49d0-ac52-5ebbd9ca4dd4",
+          "name": "Gas",
+          "amount": 250.4,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "1ef471df-6551-45f5-9893-a16475ee6643",
+          "name": "Internet",
+          "amount": 55,
+          "owner": "Haleigh",
+          "splitType": "utility",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "0730198d-0a7b-483c-8e75-eae403e3c9ed",
+          "name": "Mortgage",
+          "amount": 2300,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "4c6f3b9a-2822-4645-aa3b-65e788acc46f",
+          "name": "Water Works",
+          "amount": 362.32,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "7df6d5dd-ddb1-44c7-9bb4-0e731578f2b2",
+          "name": "Spotify",
+          "amount": 20.01,
+          "owner": "Jeff",
+          "splitType": "subscription",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "f6065e37-e416-4d55-93ae-12d3eb5cff28",
+          "name": "Netflix",
+          "amount": 25,
+          "owner": "Jeff",
+          "splitType": "subscription",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": true
+        }
+      ]
+    },
+    "2026-03": {
+      "bills": [
+        {
+          "id": "06e550db-1c2a-45d4-ba93-22ebb33bf4f7",
+          "name": "AEP",
+          "amount": 114.57,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "f1dadf63-cad9-430b-b61b-811fa6633268",
+          "name": "Gas",
+          "amount": 250.4,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "3bffa383-55eb-4da0-8fd7-226b88b4cf8a",
+          "name": "Internet",
+          "amount": 55,
+          "owner": "Haleigh",
+          "splitType": "utility",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "3c24e48d-2f59-48b2-8fab-35ca90f7b7e8",
+          "name": "Mortgage",
+          "amount": 2300,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "99051a95-7212-46bb-a27d-de7be5a0cb04",
+          "name": "Water Works",
+          "amount": 362.32,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "6c6a9328-19ae-42fd-9c61-3e0f47b0669a",
+          "name": "Spotify",
+          "amount": 20.01,
+          "owner": "Jeff",
+          "splitType": "subscription",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": true
+        },
+        {
+          "id": "27279c09-222a-46a7-9dca-83a821d9c1ef",
+          "name": "Netflix",
+          "amount": 25,
+          "owner": "Jeff",
+          "splitType": "subscription",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": true
+        }
+      ]
+    },
+    "2026-02": {
+      "bills": [
+        {
+          "id": "7ebc1a49-f934-4f07-85ca-4b7e92b5bffe",
+          "name": "AEP",
+          "amount": 114.57,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": false
+        },
+        {
+          "id": "26052cc8-9144-4db3-90a3-92be0cbafb28",
+          "name": "Gas",
+          "amount": 250.4,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": false
+        },
+        {
+          "id": "d8ffe88f-0da7-418b-b544-0489174cb00a",
+          "name": "Internet",
+          "amount": 55,
+          "owner": "Haleigh",
+          "splitType": "utility",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": false
+        },
+        {
+          "id": "1ebac34d-c5f2-44f7-8755-ced9e00b2933",
+          "name": "Mortgage",
+          "amount": 2300,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": false
+        },
+        {
+          "id": "40508ce8-0a15-4ca5-88ba-be2e3497d25b",
+          "name": "Water Works",
+          "amount": 362.32,
+          "owner": "Jeff",
+          "splitType": "utility",
+          "partner1Percent": 55,
+          "notes": "",
+          "settled": false
+        },
+        {
+          "id": "32647c69-6144-4fdd-b330-e9b7ded5cf22",
+          "name": "Spotify",
+          "amount": 20.01,
+          "owner": "Jeff",
+          "splitType": "subscription",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": false
+        },
+        {
+          "id": "ef3be660-c7a1-45cc-82a3-2e12c50bed1e",
+          "name": "Netflix",
+          "amount": 25,
+          "owner": "Jeff",
+          "splitType": "subscription",
+          "partner1Percent": 50,
+          "notes": "",
+          "settled": false
+        }
+      ]
+    }
+  },
+  "templates": [
+    {
+      "id": "f792b1eb-1e7b-46be-a020-a0c5d79a23a8",
+      "name": "AEP",
+      "amount": 114.57,
+      "owner": "Jeff",
+      "splitType": "utility",
+      "partner1Percent": 55,
+      "notes": ""
+    },
+    {
+      "id": "2dfdb026-c00d-4efd-aa00-08715f316858",
+      "name": "Gas",
+      "amount": 250.4,
+      "owner": "Jeff",
+      "splitType": "utility",
+      "partner1Percent": 55,
+      "notes": ""
+    },
+    {
+      "id": "a1ed8504-3388-419d-89ae-dde2276a3af3",
+      "name": "Internet",
+      "amount": 55,
+      "owner": "Haleigh",
+      "splitType": "utility",
+      "partner1Percent": 50,
+      "notes": ""
+    },
+    {
+      "id": "3cec2177-f66b-4c74-81c1-98962127bef2",
+      "name": "Mortgage",
+      "amount": 2300,
+      "owner": "Jeff",
+      "splitType": "utility",
+      "partner1Percent": 55,
+      "notes": ""
+    },
+    {
+      "id": "800ddea5-9ce0-45a7-bc3d-2ae2b026a649",
+      "name": "Water Works",
+      "amount": 362.32,
+      "owner": "Jeff",
+      "splitType": "utility",
+      "partner1Percent": 55,
+      "notes": ""
+    },
+    {
+      "id": "6c4148a9-1f98-432f-9d97-f9fa13c83c28",
+      "name": "Spotify",
+      "amount": 20.01,
+      "owner": "Jeff",
+      "splitType": "subscription",
+      "partner1Percent": 50,
+      "notes": ""
+    },
+    {
+      "id": "5860c55f-773d-4733-89eb-9a882947c49d",
+      "name": "Netflix",
+      "amount": 25,
+      "owner": "Jeff",
+      "splitType": "subscription",
+      "partner1Percent": 50,
+      "notes": ""
+    }
+  ]
+}
