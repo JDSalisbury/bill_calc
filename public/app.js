@@ -66,10 +66,12 @@ function calcBalance() {
     const p2Pct = 1 - p1Pct;
     p1Share += bill.amount * p1Pct;
     p2Share += bill.amount * p2Pct;
-    if (bill.owner === partner1) {
-      p2OwesP1 += bill.amount * p2Pct;
-    } else {
-      p1OwesP2 += bill.amount * p1Pct;
+    if (!bill.settled) {
+      if (bill.owner === partner1) {
+        p2OwesP1 += bill.amount * p2Pct;
+      } else {
+        p1OwesP2 += bill.amount * p1Pct;
+      }
     }
   }
   return { p1Share, p2Share, net: p2OwesP1 - p1OwesP2 };
@@ -105,12 +107,12 @@ function renderSummary() {
   } else if (net > 0) {
     amountEl.textContent = fmt(net);
     amountEl.className = 'balance-amount owes';
-    labelEl.textContent = `${partner2} owes ${partner1}`;
+    labelEl.textContent = `${partner2} still owes ${partner1}`;
     arrowEl.textContent = '←';
   } else {
     amountEl.textContent = fmt(net);
     amountEl.className = 'balance-amount owes';
-    labelEl.textContent = `${partner1} owes ${partner2}`;
+    labelEl.textContent = `${partner1} still owes ${partner2}`;
     arrowEl.textContent = '→';
   }
 }
